@@ -1,5 +1,5 @@
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { ThemeToggle } from "./ThemeToggle";
 import { SearchDialog } from "./SearchDialog";
 import { cn } from "@/lib/utils";
@@ -7,14 +7,12 @@ import { cn } from "@/lib/utils";
 type NavItem = {
   title: string;
   href: string;
-  isActive?: boolean;
 };
 
 const navItems: NavItem[] = [
   {
     title: "Docs",
     href: "/",
-    isActive: true,
   },
   {
     title: "Components",
@@ -31,6 +29,8 @@ const navItems: NavItem[] = [
 ];
 
 export function MainNav() {
+  const location = useLocation();
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex h-16 items-center px-4 sm:px-6 lg:px-8">
@@ -39,9 +39,7 @@ export function MainNav() {
             <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-sidebar-primary to-sidebar-primary/60 flex items-center justify-center text-white font-semibold">
               O
             </div>
-            <span className="hidden md:block font-semibold text-lg">
-              OpenMind
-            </span>
+            <span className="hidden md:block font-semibold text-lg">OpenMind</span>
           </Link>
           <div className="hidden md:flex h-8 items-center px-3 text-xs border rounded-full bg-muted">
             <span className="font-medium">v1.0.0</span>
@@ -54,7 +52,9 @@ export function MainNav() {
               to={item.href}
               className={cn(
                 "text-sm font-medium transition-colors hover:text-foreground/80",
-                item.isActive ? "text-foreground" : "text-foreground/60"
+                location.pathname === item.href 
+                  ? "text-foreground" 
+                  : "text-foreground/60"
               )}
             >
               {item.title}
