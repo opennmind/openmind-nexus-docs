@@ -1,5 +1,5 @@
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import {
   Book,
@@ -20,94 +20,111 @@ type SidebarSection = {
   }[];
 };
 
-const mainItems = [
-  {
-    title: "Documentation",
-    href: "/",
-    icon: <FileText className="w-4 h-4" />,
-    isActive: true,
-  },
-  {
-    title: "Components",
-    href: "/components",
-    icon: <Component className="w-4 h-4" />,
-  },
-  {
-    title: "Templates",
-    href: "/templates",
-    icon: <Layout className="w-4 h-4" />,
-  },
-  {
-    title: "Screencasts",
-    href: "/screencasts",
-    icon: <Play className="w-4 h-4" />,
-  },
-  {
-    title: "Playground",
-    href: "/playground",
-    icon: <Code className="w-4 h-4" />,
-  },
-  {
-    title: "Resources",
-    href: "/resources",
-    icon: <Package className="w-4 h-4" />,
-  },
-];
-
-const gettingStartedSection: SidebarSection = {
-  title: "Getting Started",
-  items: [
-    {
-      title: "Installation",
-      href: "/docs/installation",
-    },
-    {
-      title: "Editor Setup",
-      href: "/docs/editor-setup",
-    },
-    {
-      title: "Optimizing for Production",
-      href: "/docs/optimizing-for-production",
-    },
-    {
-      title: "Browser Support",
-      href: "/docs/browser-support",
-    },
-    {
-      title: "Upgrade Guide",
-      href: "/docs/upgrade-guide",
-    },
-  ],
-};
-
-const firstStepSection: SidebarSection = {
-  title: "The First Step",
-  items: [
-    {
-      title: "Utility-First Fundamental",
-      href: "/docs/utility-first",
-      isActive: true,
-    },
-    {
-      title: "Hover, Focus",
-      href: "/docs/hover-focus",
-    },
-    {
-      title: "Responsive Design",
-      href: "/docs/responsive-design",
-    },
-    {
-      title: "Dark Mode",
-      href: "/docs/dark-mode",
-    },
-    {
-      title: "Reusing Styles",
-      href: "/docs/reusing-styles",
-    },
-  ],
-};
-
 export function DocsSidebar() {
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  const mainItems = [
+    {
+      title: "Documentation",
+      href: "/",
+      icon: <FileText className="w-4 h-4" />,
+      isActive: currentPath === "/",
+    },
+    {
+      title: "Components",
+      href: "/components",
+      icon: <Component className="w-4 h-4" />,
+      isActive: currentPath === "/components",
+    },
+    {
+      title: "Templates",
+      href: "/templates",
+      icon: <Layout className="w-4 h-4" />,
+      isActive: currentPath === "/templates",
+    },
+    {
+      title: "Screencasts",
+      href: "/screencasts",
+      icon: <Play className="w-4 h-4" />,
+      isActive: currentPath === "/screencasts",
+    },
+    {
+      title: "Playground",
+      href: "/playground",
+      icon: <Code className="w-4 h-4" />,
+      isActive: currentPath === "/playground",
+    },
+    {
+      title: "Resources",
+      href: "/resources",
+      icon: <Package className="w-4 h-4" />,
+      isActive: currentPath === "/resources",
+    },
+  ];
+
+  const gettingStartedSection: SidebarSection = {
+    title: "Getting Started",
+    items: [
+      {
+        title: "Installation",
+        href: "/docs/installation",
+        isActive: currentPath === "/docs/installation",
+      },
+      {
+        title: "Editor Setup",
+        href: "/docs/editor-setup",
+        isActive: currentPath === "/docs/editor-setup",
+      },
+      {
+        title: "Optimizing for Production",
+        href: "/docs/optimizing-for-production",
+        isActive: currentPath === "/docs/optimizing-for-production",
+      },
+      {
+        title: "Browser Support",
+        href: "/docs/browser-support",
+        isActive: currentPath === "/docs/browser-support",
+      },
+      {
+        title: "Upgrade Guide",
+        href: "/docs/upgrade-guide",
+        isActive: currentPath === "/docs/upgrade-guide",
+      },
+    ],
+  };
+
+  const firstStepSection: SidebarSection = {
+    title: "The First Step",
+    items: [
+      {
+        title: "Utility-First Fundamental",
+        href: "/docs/utility-first",
+        isActive: currentPath === "/docs/utility-first",
+      },
+      {
+        title: "Hover, Focus",
+        href: "/docs/hover-focus",
+        isActive: currentPath === "/docs/hover-focus",
+      },
+      {
+        title: "Responsive Design",
+        href: "/docs/responsive-design",
+        isActive: currentPath === "/docs/responsive-design",
+      },
+      {
+        title: "Dark Mode",
+        href: "/docs/dark-mode",
+        isActive: currentPath === "/docs/dark-mode",
+      },
+      {
+        title: "Reusing Styles",
+        href: "/docs/reusing-styles",
+        isActive: currentPath === "/docs/reusing-styles",
+      },
+    ],
+  };
+
   return (
     <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 border-r pt-16 lg:flex lg:flex-col">
       <div className="flex flex-1 flex-col overflow-y-auto py-5 px-3">
