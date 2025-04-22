@@ -5,33 +5,22 @@ import {
   Book,
   Code,
   Component,
-  File,
   FileText,
-  FolderOpen,
-  Home,
   Layout,
   Package,
   Play,
-  Settings,
 } from "lucide-react";
 
 type SidebarSection = {
   title: string;
-  items: SidebarItem[];
+  items: {
+    title: string;
+    href: string;
+    isActive?: boolean;
+  }[];
 };
 
-type SidebarItem = {
-  title: string;
-  href: string;
-  icon?: React.ReactNode;
-  isActive?: boolean;
-};
-
-type SidebarProps = {
-  className?: string;
-};
-
-const mainSections: SidebarItem[] = [
+const mainItems = [
   {
     title: "Documentation",
     href: "/",
@@ -118,18 +107,14 @@ const firstStepSection: SidebarSection = {
   ],
 };
 
-export function DocsSidebar({ className }: SidebarProps) {
+export function DocsSidebar() {
   return (
-    <aside
-      className={cn(
-        "fixed inset-y-0 left-0 z-30 hidden w-64 border-r pt-16 lg:flex lg:flex-col",
-        className
-      )}
-    >
+    <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 border-r pt-16 lg:flex lg:flex-col">
       <div className="flex flex-1 flex-col overflow-y-auto py-5 px-3">
         <nav className="space-y-8">
+          {/* Main Navigation Items */}
           <div className="space-y-2">
-            {mainSections.map((item, index) => (
+            {mainItems.map((item, index) => (
               <Link
                 key={index}
                 to={item.href}
@@ -146,6 +131,7 @@ export function DocsSidebar({ className }: SidebarProps) {
             ))}
           </div>
 
+          {/* Getting Started Section */}
           <div className="space-y-2">
             <h3 className="px-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               {gettingStartedSection.title}
@@ -168,6 +154,7 @@ export function DocsSidebar({ className }: SidebarProps) {
             </div>
           </div>
 
+          {/* First Step Section */}
           <div className="space-y-2">
             <h3 className="px-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               {firstStepSection.title}

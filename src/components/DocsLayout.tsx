@@ -21,6 +21,7 @@ export function DocsLayout({
     <div className="relative flex min-h-screen flex-col">
       <MainNav />
       <div className="flex-1">
+        {/* Mobile Navigation */}
         <div className="border-b bg-background md:hidden">
           <div className="flex h-16 items-center px-4 gap-1">
             <MobileNav />
@@ -32,10 +33,15 @@ export function DocsLayout({
             </div>
           </div>
         </div>
+
+        {/* Desktop Layout with Sidebar */}
         <div className="container flex-1 items-start md:grid md:grid-cols-[220px_1fr] lg:grid-cols-[256px_1fr] xl:grid-cols-[256px_1fr_256px] md:gap-6 lg:gap-10 mt-4">
+          {/* Left Sidebar */}
           <aside className="fixed top-16 z-30 hidden h-[calc(100vh-4rem)] w-full shrink-0 md:sticky md:block">
             <DocsSidebar />
           </aside>
+
+          {/* Main Content */}
           <main
             className={cn(
               "relative py-8 lg:py-10 px-4 md:px-8 max-w-full md:max-w-screen-lg",
@@ -44,6 +50,8 @@ export function DocsLayout({
           >
             {children}
           </main>
+
+          {/* Right Sidebar (Table of Contents) */}
           {showTableOfContents && (
             <aside className="hidden text-sm xl:block">
               <TableOfContents />
